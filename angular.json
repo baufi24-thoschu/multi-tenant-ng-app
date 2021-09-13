@@ -122,6 +122,56 @@
           }
         }
       }
+    },
+    "say-hello": {
+      "projectType": "library",
+      "root": "libs/say-hello",
+      "sourceRoot": "libs/say-hello/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/say-hello"],
+          "options": {
+            "jestConfig": "libs/say-hello/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/say-hello/src/**/*.ts",
+              "libs/say-hello/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "tenant": {
+      "projectType": "library",
+      "root": "libs/tenant",
+      "sourceRoot": "libs/tenant/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tenant"],
+          "options": {
+            "jestConfig": "libs/tenant/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tenant/src/**/*.ts",
+              "libs/tenant/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

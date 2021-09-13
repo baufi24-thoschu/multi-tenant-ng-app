@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@multi-tenant-ng-app/say-hello": ["libs/say-hello/src/index.ts"],
+      "@multi-tenant-ng-app/tenant": ["libs/tenant/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

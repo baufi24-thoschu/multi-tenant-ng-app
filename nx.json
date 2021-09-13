@@ -33,6 +33,12 @@
     "multi-tenant-ng-app-dynamic-e2e": {
       "tags": [],
       "implicitDependencies": ["multi-tenant-ng-app-dynamic"]
+    },
+    "say-hello": {
+      "tags": []
+    },
+    "tenant": {
+      "tags": []
     }
   }
 }

@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  subdomain: {
+    baufi24: 'baufi24'
+  }
 };
 
 /*
