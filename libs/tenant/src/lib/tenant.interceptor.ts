@@ -13,7 +13,7 @@ export class TenantInterceptor implements HttpInterceptor {
     const headers = this.tenantService.addTenantToHeaders(request.headers);
 
     request = request.clone({
-      headers: headers
+      headers
     });
 
     return next.handle(request);

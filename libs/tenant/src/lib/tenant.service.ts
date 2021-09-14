@@ -35,6 +35,7 @@ export class TenantService {
   }
 
   public addTenantToHeaders(headers: HttpHeaders): HttpHeaders {
-    return headers.append("x-tenant-id", this.getTenant());
+    const headerName = 'x-tenant-id';
+    return headers.append(headerName, this.getTenant());
   }
 }

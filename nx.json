@@ -39,6 +39,9 @@
     },
     "tenant": {
       "tags": []
+    },
+    "test-server": {
+      "tags": []
     }
   }
 }
