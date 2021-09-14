@@ -1,24 +1,29 @@
-import { Injectable } from '@angular/core';
-
-import { Tenant, TenantService } from '@multi-tenant-ng-app/tenant';
+import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
 
 import { Client01SayHelloService } from './client01-say-hello.service';
 import { Client02SayHelloService } from './client02-say-hello.service';
 
-export function getLoginService(tenantService: TenantService, client1LoginService: Client01SayHelloService, client2loginService: Client02SayHelloService): SayHelloService {
-  if (tenantService.getTenant() === Tenant.CLIENT01) {
-    return client1LoginService;
-  } else if (tenantService.getTenant() === Tenant.CLIENT02) {
-    return client2loginService;
+export function getSayHelloService(tenantService: TenantService, client01SayHelloService: Client01SayHelloService, client02SayHelloService: Client02SayHelloService): SayHelloService {
+  let clientSayHelloService: SayHelloService;
+
+  switch(tenantService.getTenant()) {
+    case TenantEnum.CLIENT01:
+      clientSayHelloService = client01SayHelloService;
+      break;
+    case TenantEnum.CLIENT02:
+      clientSayHelloService = client02SayHelloService;
+      break;
+    default:
+      throw new Error('Unknown tenant for say-hello service');
   }
 
-  throw new Error("Unknown tenant for login service");
+  return client02SayHelloService;
 }
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-export abstract class SayHelloService {
-  protected constructor() { }
-  public abstract login(username: string, password: string): boolean;
+export abstract class SayHelloService extends Object {
+  protected constructor() {
+    super();
+  }
+
+  public abstract sayHello(text: string): boolean;
 }

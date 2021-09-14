@@ -10,8 +10,8 @@ export class Client02SayHelloService extends SayHelloService {
     super();
   }
 
-  login(username: string, password: string): boolean {
-    console.log('### 02 ###');
+  sayHello(text: string): boolean {
+    console.log(`*** ${text} ***`);
     return false;
   }
 }

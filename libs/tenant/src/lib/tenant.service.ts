@@ -1,39 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from "@angular/common/http";
 
-import { Tenant } from './tenant.enum';
+import { TenantEnum } from './tenant.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TenantService {
-  // constructor() {}
+  private readonly hostname: string;
 
-  protected getTenantForHostname(hostname: string): string | null {
-    return this.getTenantForHost(hostname.split('.')[0]);
+  constructor() {
+    this.hostname = window.location.hostname;
   }
 
-  protected getTenantForString(s: string): string {
-    for (const e in Tenant) {
-      if (e.toLowerCase() === s.toLowerCase()) {
+  protected getTenantForHostname(hostname: string): string {
+    const hostnameDivided : Array<string> = hostname.split('.');
+    const domain: string = hostnameDivided[0];
 
+    return this.getTenantForHost(domain);
+  }
+
+  protected getTenantForString(domain: string): string {
+    for (const e in TenantEnum) {
+      if (e.toLowerCase() === domain.toLowerCase()) {
         // @ts-ignore
-        return Tenant[e];
+        return TenantEnum[e];
       }
     }
 
     return '';
   }
 
-  protected getTenantForHost(host: string): string | null {
+  protected getTenantForHost(host: string): string {
     return this.getTenantForString(host);
   }
 
-  public getTenant(): string | null {
-    return this.getTenantForHostname(window.location.hostname);
+  public getTenant(): string {
+    return this.getTenantForHostname(this.hostname);
   }
 
   public addTenantToHeaders(headers: HttpHeaders): HttpHeaders {
-    return headers.append("X-TenantEnum-ID", this.getTenant() as string);
+    return headers.append("x-tenant-id", this.getTenant());
   }
 }
