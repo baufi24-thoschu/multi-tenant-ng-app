@@ -14,13 +14,13 @@ export class AppService {
 
   public getFromApi(): void {
     this.apiObservable.subscribe((result: any) => {
-      console.log(result);
-    }, (err: Error) => console.error(err));
+      window.console.dir(result);
+    },(err: Error) => window.console.error(err));
   }
 
   public getFromCustom(path: string): void {
     this.http.get(path).subscribe((result: any) => {
-      console.log(result);
-    }, (err: Error) => console.error(err));
+      window.console.dir(result);
+    },(err: Error) => console.error(err));
   }
 }
