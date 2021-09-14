@@ -13,8 +13,14 @@ export class AppService {
   }
 
   public getFromApi(): void {
-    this.apiObservable.subscribe((foo)=> {
-      console.log(foo);
-    }, err => console.error(err));
+    this.apiObservable.subscribe((result: any) => {
+      console.log(result);
+    }, (err: Error) => console.error(err));
+  }
+
+  public getFromCustom(path: string): void {
+    this.http.get(path).subscribe((result: any) => {
+      console.log(result);
+    }, (err: Error) => console.error(err));
   }
 }
