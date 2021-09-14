@@ -24,6 +24,9 @@ export class AppComponent implements OnInit {
 
   private enableThemes(): void {
     const tenant: string = this.tenantService.getTenant();
+
+    console.log(tenant);
+
     this.client1Theme = tenant === TenantEnum.CLIENT01;
     this.client2Theme = tenant === TenantEnum.CLIENT02;
   }

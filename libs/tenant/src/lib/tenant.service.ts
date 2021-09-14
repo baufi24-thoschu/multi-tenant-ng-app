@@ -21,14 +21,9 @@ export class TenantService {
   }
 
   protected getTenantForString(domain: string): string {
-    for (const e in TenantEnum) {
-      if (e.toLowerCase() === domain.toLowerCase()) {
-        // @ts-ignore
-        return TenantEnum[e];
-      }
-    }
+    const tenantEnumValueArray: Array<string> = Object.values(TenantEnum);
 
-    return '';
+    return tenantEnumValueArray.includes(domain) ? domain : 'default';
   }
 
   protected getTenantForHost(host: string): string {
