@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
-  private readonly getObservable: Observable<any>;
+  private readonly apiObservable: Observable<any>;
 
   public constructor(private http: HttpClient) {
-    this.getObservable = this.http.get('/api/');
+    this.apiObservable = this.http.get('/api/');
   }
 
   public getFromApi(): void {
-    this.getObservable.subscribe((foo)=> {
+    this.apiObservable.subscribe((foo)=> {
       console.log(foo);
     }, err => console.error(err));
   }

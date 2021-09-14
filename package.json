@@ -12,8 +12,10 @@
     "serve:all": "concurrently \"npm run serve:baufi24\" \"npm run serve:coba\"",
     "serve:baufi24": "nx serve --host baufi24.localhost --port 4300  --proxy-config ./proxy.conf.json --open",
     "serve:coba": "nx serve --host coba.localhost --port 4400 --proxy-config ./proxy.conf.json --open",
-    "serve:nest": "nx serve test-server",
-    "server": "json-server --watch db.json"
+    "servers": "concurrently \"npm run server:nest\" \"npm run server:json\"",
+    "server:nest": "nx serve test-server",
+    "server:json": "json-server --watch db.json",
+    "all": "concurrently \"npm run servers\" \"npm run serve:all\""
   },
   "private": true,
   "dependencies": {

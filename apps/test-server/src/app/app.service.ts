@@ -12,7 +12,7 @@ export class AppService {
     return { message: this.text };
   }
 
-  public logRequest(request: Request): void {
-    console.log(request.headers);
+  public getConfig(request: Request): void {
+    console.log(request.headers['x-tenant-id']);
   }
 }
