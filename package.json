@@ -7,15 +7,26 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "nx serve",
     "build": "nx build",
+    "build:test": "nx build",
     "test": "nx test",
     "serve": "nx serve",
     "serve:all": "concurrently \"npm run serve:baufi24\" \"npm run serve:coba\"",
     "serve:baufi24": "nx serve --host baufi24.localhost --port 4300  --proxy-config ./proxy.conf.json --open",
     "serve:coba": "nx serve --host coba.localhost --port 4400 --proxy-config ./proxy.conf.json --open",
+    "server:dist:ng": "npx http-server dist/apps/multi-tenant-ng-app-dynamic -a localhost -p 80",
     "server:all": "concurrently \"npm run server:nest\" \"npm run server:json\"",
     "server:nest": "nx serve test-server",
     "server:json": "json-server --watch db.json",
-    "all": "concurrently \"npm run server:all\" \"npm run serve:all\""
+    "all": "concurrently \"npm run server:all\" \"npm run serve:all\"",
+    "docker:build:ng": "docker build -t baufi24/caccount --build-arg ENVIRONMENT=test --build-arg NPM_TOKEN=130777 --no-cache -f docker/ng/Dockerfile .",
+    "docker:build:nestjs": "docker build -t baufi24/caccount --build-arg ENVIRONMENT=test --build-arg NPM_TOKEN=130777 --no-cache -f docker/nestjs/Dockerfile .",
+    "docker:keycloak": "docker run -d -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:latest",
+    "docker-compose:keycloak:up": "docker-compose up -d",
+    "docker-compose:keycloak:down": "docker-compose down",
+    "docker:scan:ng": "docker scan baufi24/caccount",
+    "clean:dist": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "clean:all": "concurrently \"npm run clean:dist\" \"npm run clean:node_modules\""
   },
   "private": true,
   "dependencies": {
@@ -70,7 +81,10 @@
     "jest": "27.0.3",
     "jest-preset-angular": "9.0.7",
     "json-server": "^0.16.3",
+    "ngrok": "^4.2.2",
+    "node-mocks-http": "^1.10.1",
     "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "27.0.3",
     "typescript": "~4.3.5"
   }

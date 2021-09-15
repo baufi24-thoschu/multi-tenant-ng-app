@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getData(@Req() request: Request) {
+  public getData(@Req() request: Request): any {
     this.appService.getConfig(request);
     return this.appService.getData();
   }

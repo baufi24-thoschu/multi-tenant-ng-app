@@ -11,13 +11,13 @@
 
 :host-context(.theme-client1) {
   .message {
-    color: red;
+    color: blue;
   }
 }
 
 :host-context(.theme-client2) {
   .message {
-    color: blue;
+    color: red;
   }
 }
 

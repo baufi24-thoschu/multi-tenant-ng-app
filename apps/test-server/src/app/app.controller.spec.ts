@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { createRequest } from 'node-mocks-http';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -16,7 +18,7 @@ describe('AppController', () => {
   describe('getData', () => {
     it('should return "Welcome to test-server!"', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({
+      expect(appController.getData(createRequest())).toEqual({
         message: 'Welcome to test-server!',
       });
     });
