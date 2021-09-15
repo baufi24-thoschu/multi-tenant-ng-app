@@ -17,7 +17,7 @@ export function getSayHelloService(tenantService: TenantService, client01SayHell
       throw new Error('Unknown tenant for say-hello service');
   }
 
-  return client02SayHelloService;
+  return clientSayHelloService;
 }
 
 export abstract class SayHelloService extends Object {

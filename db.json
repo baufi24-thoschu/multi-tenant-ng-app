@@ -1,9 +1,22 @@
 {
   "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
+    {
+      "id": 7,
+      "title": "ruby-fake-monolith",
+      "author": "Tom S."
+    }
   ],
   "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
+    {
+      "id": 13,
+      "body": "some comment",
+      "postId": 1,
+      "title": "ruby-fake-monolith"
+    }
   ],
-  "profile": { "name": "typicode" }
+  "profile": {
+    "name": "Thomas",
+    "city": "Hamburg",
+    "title": "ruby-fake-monolith"
+  }
 }
