@@ -4,14 +4,14 @@ import { SayHelloService } from './say-hello.service';
 @Injectable({
   providedIn: 'root'
 })
-export class Client02SayHelloService extends SayHelloService {
+export class Client03SayHelloService extends SayHelloService {
 
   constructor() {
     super();
   }
 
   sayHello(text: string): boolean {
-    console.log(`*** ${text} ***`);
-    return true;
+    console.log(`... ${text} ...`);
+    return false;
   }
 }

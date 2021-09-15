@@ -42,6 +42,9 @@
     },
     "test-server": {
       "tags": []
+    },
+    "ui": {
+      "tags": []
     }
   }
 }

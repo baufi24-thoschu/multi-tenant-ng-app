@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
 
+import { KeycloakService } from 'keycloak-angular';
+
 import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
 import { SayHelloService } from '@multi-tenant-ng-app/say-hello';
 
@@ -19,6 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   @HostBinding('class.theme-client2') public client2Theme: boolean;
 
   constructor(
+    private readonly keycloakService: KeycloakService,
     private readonly tenantService: TenantService,
     private readonly appService: AppService,
     private readonly sayHelloService: SayHelloService
@@ -56,5 +59,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         // console.log(tenant);
       }
     }
+  }
+
+  public logout(): void {
+    this.keycloakService.logout().then(res => console.log(res)).catch(err => console.error(err));
   }
 }

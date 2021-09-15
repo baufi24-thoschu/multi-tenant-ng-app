@@ -2,8 +2,14 @@ import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
 
 import { Client01SayHelloService } from './client01-say-hello.service';
 import { Client02SayHelloService } from './client02-say-hello.service';
+import { Client03SayHelloService } from './client03-say-hello.service';
 
-export function getSayHelloService(tenantService: TenantService, client01SayHelloService: Client01SayHelloService, client02SayHelloService: Client02SayHelloService): SayHelloService {
+export function getSayHelloService(
+  tenantService: TenantService,
+  client01SayHelloService: Client01SayHelloService,
+  client02SayHelloService: Client02SayHelloService,
+  client03SayHelloService: Client03SayHelloService
+): SayHelloService {
   let clientSayHelloService: SayHelloService;
 
   switch(tenantService.getTenant()) {
@@ -14,7 +20,8 @@ export function getSayHelloService(tenantService: TenantService, client01SayHell
       clientSayHelloService = client02SayHelloService;
       break;
     default:
-      throw new Error('Unknown tenant for say-hello service');
+      clientSayHelloService = client03SayHelloService;
+      // throw new Error('Unknown tenant for say-hello service');
   }
 
   return clientSayHelloService;

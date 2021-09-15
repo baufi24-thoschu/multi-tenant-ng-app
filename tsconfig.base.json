@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@multi-tenant-ng-app/say-hello": ["libs/say-hello/src/index.ts"],
-      "@multi-tenant-ng-app/tenant": ["libs/tenant/src/index.ts"]
+      "@multi-tenant-ng-app/tenant": ["libs/tenant/src/index.ts"],
+      "@multi-tenant-ng-app/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

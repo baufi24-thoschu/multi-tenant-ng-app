@@ -5,8 +5,10 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
+  keycloak: 'http://localhost:8080',
   subdomain: {
-    baufi24: 'baufi24'
+    baufi24: 'baufi24',
+    commerzbank: 'coba'
   }
 };
 
