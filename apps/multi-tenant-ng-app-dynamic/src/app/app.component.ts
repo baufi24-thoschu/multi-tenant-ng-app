@@ -1,7 +1,9 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 
 import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
+
 import { AppService } from './app.service';
+import { AppEnum } from './app.enum';
 
 @Component({
   selector: 'multi-tenant-ng-app-root',
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.enableThemes();
     this.appService.getFromApi();
+    this.appService.getFromCustom(AppEnum.posts);
   }
 
   private enableThemes(): void {
