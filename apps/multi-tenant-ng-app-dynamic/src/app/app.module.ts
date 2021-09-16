@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
     {
       provide: APP_INITIALIZER,
       useFactory: (keycloak: KeycloakService): () => void => {
-        return () => {
+        return (): void => {
           keycloak
             .init({
               config: {
@@ -34,11 +34,9 @@ import { environment } from '../environments/environment';
             })
             .then((res: boolean) => console.log(`KeycloakInit: ${res}`))
             .then(() => {
-              // console.log(keycloak.getKeycloakInstance().idToken);
               console.log(keycloak.getKeycloakInstance().idTokenParsed);
-
             })
-            .catch((err: Error) => console.error(`X KeycloakInit: ${err}`));
+            .catch((err: Error) => console.error(`Error KeycloakInit: ${err}`));
         }
       },
       multi: true,
