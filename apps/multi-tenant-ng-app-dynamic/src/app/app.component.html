@@ -135,6 +135,12 @@
   </pre
     >
   </details>
+  <hr>
+<!--  <a [routerLink]="['/foo/', products.id]" >FOO</a>-->
+  <a [routerLink]="['/foo/']" >FOO</a><br>
+  <a [routerLink]="['/bar/']" >BAR</a><br>
+  <a [routerLink]="['/baz/']" >BAZ</a>
+  <router-outlet></router-outlet>
   <div>
     <p (click)='logout()' class="message">&copy; by Baufi24 AG</p>
   </div>

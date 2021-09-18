@@ -1,20 +1,35 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-// import { RouterModule } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { TenantModule } from '@multi-tenant-ng-app/tenant';
 import { SayHelloModule } from '@multi-tenant-ng-app/say-hello';
+import { FooListComponent, FooListModule } from '@multi-tenant-ng-app/foo-list';
+import { BarListComponent, BarListModule } from '@multi-tenant-ng-app/bar-list';
+import { BazListComponent, BazListModule } from '@multi-tenant-ng-app/baz-list';
 
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 
+const routes: Routes = [
+  { path: '', redirectTo: '/foo', pathMatch: 'full' },
+  { path: 'foo', pathMatch: 'prefix', component: FooListComponent },
+  { path: 'bar', pathMatch: 'prefix', component: BarListComponent },
+  { path: '**', component: BazListComponent }
+];
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, KeycloakAngularModule, SayHelloModule, TenantModule],
+  imports: [
+    BrowserModule, HttpClientModule, RouterModule.forRoot(routes),
+    KeycloakAngularModule,
+    SayHelloModule, TenantModule,
+    FooListModule, BarListModule, BazListModule
+  ],
   providers: [
     {
       provide: APP_INITIALIZER,

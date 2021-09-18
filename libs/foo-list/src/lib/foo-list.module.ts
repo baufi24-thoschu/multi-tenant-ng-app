@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodosComponent } from './todos/todos.component';
+import { FooListComponent } from './foo-list/foo-list.component';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    TodosComponent
+    FooListComponent
   ],
   exports: [
-    TodosComponent
-  ],
+    FooListComponent
+  ]
 })
-export class UiModule {}
+export class FooListModule {}

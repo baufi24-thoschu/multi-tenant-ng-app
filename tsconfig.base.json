@@ -15,9 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@multi-tenant-ng-app/bar-list": ["libs/bar-list/src/index.ts"],
+      "@multi-tenant-ng-app/baz-list": ["libs/baz-list/src/index.ts"],
+      "@multi-tenant-ng-app/foo-list": ["libs/foo-list/src/index.ts"],
       "@multi-tenant-ng-app/say-hello": ["libs/say-hello/src/index.ts"],
-      "@multi-tenant-ng-app/tenant": ["libs/tenant/src/index.ts"],
-      "@multi-tenant-ng-app/ui": ["libs/ui/src/index.ts"]
+      "@multi-tenant-ng-app/tenant": ["libs/tenant/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

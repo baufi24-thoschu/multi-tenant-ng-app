@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'ui',
+  displayName: 'baz-list',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/ui',
+  coverageDirectory: '../../coverage/libs/baz-list',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

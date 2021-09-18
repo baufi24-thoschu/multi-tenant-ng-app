@@ -38,3 +38,5 @@ services:
 #        NPM_TOKEN: 130777
 #    ports:
 #      - "3000:3000"
+#    depends_on:
+#      - keycloak
