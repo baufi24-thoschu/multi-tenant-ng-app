@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule, Router } from '@angular/router';
+import { Routes, RouterModule, Route, Router } from '@angular/router';
 
 import { FooListComponent, FooListModule } from '@multi-tenant-ng-app/foo-list';
 import { BarListComponent, BarListModule } from '@multi-tenant-ng-app/bar-list';
@@ -42,7 +42,7 @@ export class NavigationModule {
         ];
     }
 
-    this.appRoutes.forEach(route => this.router.config.unshift(route));
+    this.appRoutes.forEach((route: Route) => this.router.config.unshift(route));
   }
   public static forRoot(param: string): ModuleWithProviders<NavigationModule> {
     return {
