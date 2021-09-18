@@ -7,28 +7,18 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { TenantModule } from '@multi-tenant-ng-app/tenant';
 import { SayHelloModule } from '@multi-tenant-ng-app/say-hello';
-import { FooListComponent, FooListModule } from '@multi-tenant-ng-app/foo-list';
-import { BarListComponent, BarListModule } from '@multi-tenant-ng-app/bar-list';
-import { BazListComponent, BazListModule } from '@multi-tenant-ng-app/baz-list';
+import { NavigationModule } from '@multi-tenant-ng-app/navigation';
 
 import { AppComponent } from './app.component';
-
 import { environment } from '../environments/environment';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/foo', pathMatch: 'full' },
-  { path: 'foo', pathMatch: 'prefix', component: FooListComponent },
-  { path: 'bar', pathMatch: 'prefix', component: BarListComponent },
-  { path: '**', component: BazListComponent }
-];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, HttpClientModule, RouterModule.forRoot(routes),
+    BrowserModule, HttpClientModule, RouterModule,
     KeycloakAngularModule,
     SayHelloModule, TenantModule,
-    FooListModule, BarListModule, BazListModule
+    NavigationModule.forRoot('Tom S.')
   ],
   providers: [
     {

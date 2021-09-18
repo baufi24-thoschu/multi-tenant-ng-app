@@ -198,6 +198,31 @@
         }
       }
     },
+    "navigation": {
+      "projectType": "library",
+      "root": "libs/navigation",
+      "sourceRoot": "libs/navigation/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/navigation"],
+          "options": {
+            "jestConfig": "libs/navigation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/navigation/src/**/*.ts",
+              "libs/navigation/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "say-hello": {
       "projectType": "library",
       "root": "libs/say-hello",
