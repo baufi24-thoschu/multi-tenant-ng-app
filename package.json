@@ -24,6 +24,7 @@
     "docker-compose:keycloak:up": "docker-compose up -d",
     "docker-compose:keycloak:down": "docker-compose down",
     "docker:scan:ng": "docker scan baufi24/caccount",
+    "docker:build:mailhog": "docker build -t thoschu/mailhog:latest",
     "clean:dist": "rimraf dist",
     "clean:node_modules": "rimraf node_modules",
     "clean:all": "concurrently \"npm run clean:dist\" \"npm run clean:node_modules\""

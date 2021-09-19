@@ -5,6 +5,8 @@ volumes:
     driver: local
 
 services:
+  mailhog:
+
   postgres:
     image: postgres
     volumes:
