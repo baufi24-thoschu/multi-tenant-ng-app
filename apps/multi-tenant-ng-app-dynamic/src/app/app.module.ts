@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from "@angular/router";
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -10,6 +10,8 @@ import { SayHelloModule } from '@multi-tenant-ng-app/say-hello';
 import { NavigationModule } from '@multi-tenant-ng-app/navigation';
 
 import { AppComponent } from './app.component';
+import { AppInterceptor } from './app.interceptor';
+
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -46,7 +48,12 @@ import { environment } from '../environments/environment';
       },
       multi: true,
       deps: [KeycloakService]
-    }
+    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AppInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

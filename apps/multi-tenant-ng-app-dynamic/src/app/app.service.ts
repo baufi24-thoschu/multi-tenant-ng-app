@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AppEnum } from './app.enum';
+import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { AppEnum } from './app.enum';
 export class AppService {
   private readonly apiObservable: Observable<any>;
 
-  public constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private readonly keycloakService: KeycloakService) {
     this.apiObservable = this.http.get('/api/');
   }
 
