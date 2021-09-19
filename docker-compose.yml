@@ -6,7 +6,12 @@ volumes:
 
 services:
   mailhog:
-
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    container_name: mailhog
+    hostname: demo-mail
   postgres:
     image: postgres
     volumes:
@@ -15,6 +20,7 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
+    container_name: postgres
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     environment:
@@ -30,6 +36,7 @@ services:
       #JDBC_PARAMS: "ssl=true"
     ports:
       - "8080:8080"
+    container_name: keycloak
     depends_on:
       - postgres
 #  web:
