@@ -18,9 +18,10 @@ export class AppInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const headerName = 'x-tenant-config';
+    const headers = request.headers
     const keycloakInstance = this.keycloakService.getKeycloakInstance();
-    const headers = keycloakInstance.idTokenParsed;
-    // headers.append(headerName, '#');
+    const token = keycloakInstance.idTokenParsed;
+    headers.append(headerName, '#');
     //
     //
     // request = request.clone({
