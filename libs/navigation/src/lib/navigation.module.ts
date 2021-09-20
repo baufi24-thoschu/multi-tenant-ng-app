@@ -42,10 +42,14 @@ export class NavigationModule {
         ];
     }
 
+    // console.log(this.router.config);
+
     this.appRoutes.forEach((route: Route) => this.router.config.unshift(route));
   }
-  public static forRoot(param: string): ModuleWithProviders<NavigationModule> {
-    window.console.log(param);
+
+  public static forRoot(options?: any): ModuleWithProviders<NavigationModule> {
+    window.console.log(options);
+
     return {
       ngModule: NavigationModule,
       providers: [ ]

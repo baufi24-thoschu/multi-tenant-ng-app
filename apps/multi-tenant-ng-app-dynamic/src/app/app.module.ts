@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule } from "@angular/router";
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
@@ -20,14 +20,14 @@ import { environment } from '../environments/environment';
     BrowserModule, HttpClientModule, RouterModule,
     KeycloakAngularModule,
     SayHelloModule, TenantModule,
-    NavigationModule.forRoot('Tom S.')
+    NavigationModule.forRoot()
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: (keycloak: KeycloakService): () => void => {
-        return (): void => {
-          keycloak
+        return async (): Promise<void> => {
+          await keycloak
             .init({
               config: {
                 url: `${environment.keycloak}/auth`,
@@ -40,20 +40,16 @@ import { environment } from '../environments/environment';
               }
             })
             .then((res: boolean) => console.log(`KeycloakInit: ${res}`))
-            .then(() => {
-              console.log(keycloak.getKeycloakInstance().idTokenParsed);
-            })
             .catch((err: Error) => console.error(`Error KeycloakInit: ${err}`));
         }
       },
       multi: true,
       deps: [KeycloakService]
-    },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AppInterceptor,
-    //   multi: true
-    // }
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

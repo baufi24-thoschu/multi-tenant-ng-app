@@ -37,6 +37,9 @@
     "foo-list": {
       "tags": []
     },
+    "iam": {
+      "tags": []
+    },
     "multi-tenant-ng-app-dynamic": {
       "tags": []
     },

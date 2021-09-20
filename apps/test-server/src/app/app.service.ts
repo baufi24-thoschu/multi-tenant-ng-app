@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { path } from 'ramda';
 
 @Injectable()
 export class AppService {
@@ -12,7 +13,24 @@ export class AppService {
     return { message: this.text };
   }
 
-  public getConfig(request: Request): void {
-    console.log(request.headers['x-tenant-id']);
+  public getId(request: Request): string {
+    const tenant_id_path = 'x-tenant-id';
+    const tenant_id: string = this.extractHeaderValue(request, tenant_id_path);
+
+    return tenant_id;
+  }
+
+  public getConfig(request: Request): string {
+    const construction_config_path = 'x-tenant-construction_config';
+    const construction_config: string = this.extractHeaderValue(request, construction_config_path);
+
+    return construction_config;
+  }
+
+  private extractHeaderValue(request: Request, header: string): string {
+    const headers: Headers = request.headers;
+    const headerValue: string = path([header], headers);
+
+    return headerValue;
   }
 }

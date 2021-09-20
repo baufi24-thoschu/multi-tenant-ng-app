@@ -1,7 +1,5 @@
 import { Controller, Get, Req } from '@nestjs/common';
 
-import { TenantEnum } from '@multi-tenant-ng-app/tenant';
-
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,7 +8,13 @@ export class AppController {
 
   @Get()
   public getData(@Req() request: Request): any {
-    this.appService.getConfig(request);
+    const tenant: string = this.appService.getId(request);
+    console.dir(tenant);
+
+    const construction_config: string = this.appService.getConfig(request);
+    const construction_config_object: JSON = JSON.parse(construction_config);
+    console.dir(construction_config_object);
+
     return this.appService.getData();
   }
 }

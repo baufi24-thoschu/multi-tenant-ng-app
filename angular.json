@@ -76,6 +76,31 @@
         }
       }
     },
+    "iam": {
+      "projectType": "library",
+      "root": "libs/iam",
+      "sourceRoot": "libs/iam/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/iam"],
+          "options": {
+            "jestConfig": "libs/iam/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/iam/src/**/*.ts",
+              "libs/iam/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "multi-tenant-ng-app-dynamic": {
       "projectType": "application",
       "root": "apps/multi-tenant-ng-app-dynamic",
