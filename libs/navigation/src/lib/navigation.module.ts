@@ -48,7 +48,7 @@ export class NavigationModule {
   }
 
   public static forRoot(options?: any): ModuleWithProviders<NavigationModule> {
-    window.console.log(options);
+    // window.console.log(options);
 
     return {
       ngModule: NavigationModule,

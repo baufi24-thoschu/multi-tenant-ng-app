@@ -18,6 +18,8 @@
     "server:nest": "nx serve test-server",
     "server:json": "json-server --watch db.json",
     "all": "concurrently \"npm run server:all\" \"npm run serve:all\"",
+    "ngrok:ng:baufi24": "ngrok http -subdomain=baufi24 --host-header=rewrite 4300",
+    "ngrok:ng:coba": "ngrok http -subdomain=coba --host-header=rewrite 4400",
     "docker:build:ng": "docker build -t baufi24/caccount --build-arg ENVIRONMENT=test --build-arg NPM_TOKEN=130777 --no-cache -f docker/ng/Dockerfile .",
     "docker:build:nestjs": "docker build -t baufi24/caccount --build-arg ENVIRONMENT=test --build-arg NPM_TOKEN=130777 --no-cache -f docker/nestjs/Dockerfile .",
     "docker-compose:keycloak:up": "docker-compose up -d",

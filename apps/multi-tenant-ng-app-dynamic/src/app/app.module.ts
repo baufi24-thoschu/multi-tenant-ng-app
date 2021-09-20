@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
     BrowserModule, HttpClientModule, RouterModule,
     KeycloakAngularModule,
     SayHelloModule, TenantModule,
-    NavigationModule.forRoot()
+    NavigationModule.forRoot(null)
   ],
   providers: [
     {
@@ -30,9 +30,9 @@ import { environment } from '../environments/environment';
           await keycloak
             .init({
               config: {
-                url: `${environment.keycloak}/auth`,
-                realm: 'baufi24',
-                clientId: 'ng-dynamic'
+                url: `${environment.keycloak.uri}/auth`,
+                realm: environment.keycloak.realm,
+                clientId: environment.keycloak.clientId
               },
               initOptions: {
                 onLoad: 'login-required',
