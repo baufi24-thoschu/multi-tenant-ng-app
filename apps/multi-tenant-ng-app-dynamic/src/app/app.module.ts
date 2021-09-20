@@ -25,9 +25,9 @@ import { environment } from '../environments/environment';
   providers: [
     {
       provide: APP_INITIALIZER,
-      useFactory: (keycloak: KeycloakService): () => void => {
+      useFactory: (keycloakService: KeycloakService): () => void => {
         return async (): Promise<void> => {
-          await keycloak
+          await keycloakService
             .init({
               config: {
                 url: `${environment.keycloak.uri}/auth`,
