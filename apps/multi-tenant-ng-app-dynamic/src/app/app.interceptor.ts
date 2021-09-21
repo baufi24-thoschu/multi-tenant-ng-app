@@ -16,7 +16,7 @@ export class AppInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const headerName = 'x-tenant-construction_config';
-    const construction_config: string = this.idTokenParsed.construction_config;
+    const construction_config: string = this.idTokenParsed.construction_config ? this.idTokenParsed.construction_config : '{}';
     const headers: HttpHeaders = request.headers.append(headerName, construction_config);
 
     request = request.clone({

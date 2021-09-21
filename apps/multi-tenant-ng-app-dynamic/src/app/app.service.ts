@@ -12,7 +12,8 @@ export class AppService {
   private readonly apiObservable: Observable<any>;
 
   constructor(private http: HttpClient, private readonly keycloakService: KeycloakService) {
-    this.apiObservable = this.http.get('/api/');
+    this.apiObservable = http.get('/api/');
+    console.log(keycloakService);
   }
 
   public getFromApi(): void {
