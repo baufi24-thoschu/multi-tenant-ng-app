@@ -53,8 +53,4 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor() {
-    console.log(`${environment.keycloak}/auth`);
-  }
-}
+export class AppModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Host, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { AppEnum } from './app.enum';
 export class AppService {
   private readonly apiObservable: Observable<any>;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(@Host() private readonly http: HttpClient) {
     this.apiObservable = http.get('/api/');
   }
 
