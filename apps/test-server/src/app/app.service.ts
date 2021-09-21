@@ -24,12 +24,16 @@ export class AppService {
     const construction_config_path = 'x-tenant-construction_config';
     const construction_config: string = this.extractHeaderValue(request, construction_config_path);
 
+    console.log('##########');
+
     return construction_config;
   }
 
   private extractHeaderValue(request: Request, header: string): string {
     const headers: Headers = request.headers;
     const headerValue: string = path([header], headers);
+
+    console.log('************');
 
     return headerValue;
   }
