@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AppEnum } from './app.enum';
-import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +10,20 @@ import { KeycloakService } from 'keycloak-angular';
 export class AppService {
   private readonly apiObservable: Observable<any>;
 
-  constructor(private http: HttpClient, private readonly keycloakService: KeycloakService) {
+  constructor(private readonly http: HttpClient) {
     this.apiObservable = http.get('/api/');
-    console.log(keycloakService);
   }
 
   public getFromApi(): void {
     this.apiObservable.subscribe((result: any) => {
+      // ToDo
       window.console.dir(result);
     },(err: Error) => window.console.error(err));
   }
 
   public getFromCustom(path: AppEnum): void {
     this.http.get(path).subscribe((result: any) => {
+      // ToDo
       window.console.dir(result);
     },(err: Error) => console.error(err));
   }
