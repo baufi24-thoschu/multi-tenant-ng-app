@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpHeaders
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
@@ -12,7 +7,6 @@ import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
   private readonly idTokenParsed: KeycloakTokenParsed | any;
-
 
   constructor(private readonly keycloakService: KeycloakService) {
     const keycloakInstance: KeycloakInstance = keycloakService.getKeycloakInstance();
