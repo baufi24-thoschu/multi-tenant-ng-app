@@ -1,9 +1,7 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
-
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { TenantModule } from '@multi-tenant-ng-app/tenant';
 import { SayHelloModule } from '@multi-tenant-ng-app/say-hello';
