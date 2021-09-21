@@ -46,13 +46,4 @@ export class NavigationModule {
 
     this.appRoutes.forEach((route: Route) => this.router.config.unshift(route));
   }
-
-  public static forRoot(options?: any): ModuleWithProviders<NavigationModule> {
-    // window.console.log(options);
-
-    return {
-      ngModule: NavigationModule,
-      providers: [ ]
-    }
-  }
 }

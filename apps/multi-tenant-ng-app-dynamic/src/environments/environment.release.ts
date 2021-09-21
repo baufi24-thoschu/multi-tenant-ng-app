@@ -3,7 +3,7 @@ export const environment = {
   apiUrl: null,
   subdomain: null,
   keycloak: {
-    uri: null,
+    url: null,
     realm: null,
     client: null
   },
