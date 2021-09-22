@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { BarListRoutingModule } from './bar-list-routing.module';
 import { BarListComponent } from './bar-list/bar-list.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [BarListRoutingModule],
   declarations: [
     BarListComponent
   ],

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { FooListRoutingModule } from './foo-list-routing.module';
 import { FooListComponent } from './foo-list/foo-list.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [FooListRoutingModule],
   declarations: [
     FooListComponent
   ],

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { BazListRoutingModule } from './baz-list-routing.module';
 import { BazListComponent } from './baz-list/baz-list.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [BazListRoutingModule],
   declarations: [
     BazListComponent
   ],
