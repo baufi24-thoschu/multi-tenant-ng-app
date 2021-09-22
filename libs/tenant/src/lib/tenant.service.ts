@@ -10,7 +10,7 @@ export class TenantService {
   private readonly hostname: string;
 
   constructor() {
-    this.hostname = window.location.hostname;
+    this.hostname = location.hostname;
   }
 
   protected getTenantForHostname(hostname: string): string {

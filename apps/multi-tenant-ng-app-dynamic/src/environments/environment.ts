@@ -3,6 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  id: 0,
+  name: 'default',
   production: false,
   apiUrl: 'http://localhost:3000',
   subdomain: {

@@ -18,8 +18,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule, RouterModule.forRoot(routes)
-  ],
+    CommonModule, RouterModule.forRoot(routes, {
+      initialNavigation: 'enabled'
+    })
+  ]
 })
 export class NavigationModule {
   private appRoutes: Routes;

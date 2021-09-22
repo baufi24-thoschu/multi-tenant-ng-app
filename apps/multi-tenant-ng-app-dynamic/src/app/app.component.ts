@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
 
-import { KeycloakService } from 'keycloak-angular';
+// import { KeycloakService } from 'keycloak-angular';
 
-import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
+// import { TenantEnum, TenantService } from '@multi-tenant-ng-app/tenant';
 import { SayHelloService } from '@multi-tenant-ng-app/say-hello';
 
 import { AppService } from './app.service';
@@ -21,8 +21,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   @HostBinding('class.theme-client2') public client2Theme: boolean;
 
   constructor(
-    private readonly keycloakService: KeycloakService,
-    private readonly tenantService: TenantService,
+    // private readonly keycloakService: KeycloakService,
+    // private readonly tenantService: TenantService,
     private readonly appService: AppService,
     private readonly sayHelloService: SayHelloService
   ) {
@@ -36,32 +36,32 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.tenantService.getTenant() === TenantEnum.CLIENT01) {
-      this.appService.getFromCustom(AppEnum.posts);
-    } else if (this.tenantService.getTenant() === TenantEnum.CLIENT02) {
-      this.appService.getFromCustom(AppEnum.profile);
-    } else {
-      this.appService.getFromCustom(AppEnum.comments);
-    }
+    // if (this.tenantService.getTenant() === TenantEnum.CLIENT01) {
+    //   this.appService.getFromCustom(AppEnum.posts);
+    // } else if (this.tenantService.getTenant() === TenantEnum.CLIENT02) {
+    //   this.appService.getFromCustom(AppEnum.profile);
+    // } else {
+    //   this.appService.getFromCustom(AppEnum.comments);
+    // }
 
     console.log(this.sayHelloService.sayHello(AppComponent.text));
   }
 
   private enableThemes(): void {
-    const tenant: string = this.tenantService.getTenant();
-
-    this.client1Theme = tenant === TenantEnum.CLIENT01;
-    this.client2Theme = tenant === TenantEnum.CLIENT02;
-
-    for (const item in TenantEnum) {
-      if (isNaN(Number(item))) {
-        // console.log(item);
-        // console.log(tenant);
-      }
-    }
+    // const tenant: string = this.tenantService.getTenant();
+    //
+    // this.client1Theme = tenant === TenantEnum.CLIENT01;
+    // this.client2Theme = tenant === TenantEnum.CLIENT02;
+    //
+    // for (const item in TenantEnum) {
+    //   if (isNaN(Number(item))) {
+    //     // console.log(item);
+    //     // console.log(tenant);
+    //   }
+    // }
   }
 
   public logout(): void {
-    this.keycloakService.logout().then(res => console.log(res)).catch(err => console.error(err));
+    // this.keycloakService.logout().then(res => console.log(res)).catch(err => console.error(err));
   }
 }

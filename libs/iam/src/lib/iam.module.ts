@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { KeycloakAngularModule, KeycloakOptions, KeycloakService } from 'keycloak-angular';
-import { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
 
 import { IamInterceptor } from './iam.interceptor';
 
@@ -11,9 +10,9 @@ import { IamInterceptor } from './iam.interceptor';
   imports: [CommonModule, KeycloakAngularModule]
 })
 export class IamModule {
-  private static readonly initOptions: KeycloakInitOptions = { onLoad: 'login-required', flow: 'implicit' };
+  private static readonly initOptions: any = { onLoad: 'login-required', flow: 'implicit' };
 
-  public static forRoot(keycloakEnvironment: KeycloakConfig): ModuleWithProviders<IamModule> {
+  public static forRoot(keycloakEnvironment: any): ModuleWithProviders<IamModule> {
     return {
       ngModule: IamModule,
       providers: [
@@ -26,7 +25,7 @@ export class IamModule {
             return async (): Promise<void> => {
               await keycloakService
                 .init(IamModule.getKeycloakInitOptions(keycloakEnvironment))
-                .then((res: boolean) => window.console.info(`${promiseResolveText} ${res}`))
+                .then((res: boolean) => console.log(`${promiseResolveText} ${res}`))
                 .catch((err: Error) => console.error(`${promiseRejectText} ${err}`));
             };
           },
@@ -41,14 +40,14 @@ export class IamModule {
     };
   }
 
-  private static getKeycloakInitOptions(keycloakEnvironment: KeycloakConfig): KeycloakOptions {
+  private static getKeycloakInitOptions(keycloakEnvironment: any): KeycloakOptions {
     return {
       config: IamModule.getKeycloakConfig(keycloakEnvironment),
       initOptions: IamModule.initOptions
     };
   }
 
-  private static getKeycloakConfig(keycloakEnvironment: KeycloakConfig): KeycloakConfig {
+  private static getKeycloakConfig(keycloakEnvironment: any): any {
     return {
       url: `${keycloakEnvironment.url}/auth`,
       realm: keycloakEnvironment.realm,

@@ -17,14 +17,14 @@ export class AppService {
   public getFromApi(): void {
     this.apiObservable.subscribe((result: any) => {
       // ToDo
-      window.console.dir(result);
-    },(err: Error) => window.console.error(err));
+      console.dir(result);
+    },(err: Error) => console.error(err));
   }
 
   public getFromCustom(path: AppEnum): void {
     this.http.get(path).subscribe((result: any) => {
       // ToDo
-      window.console.dir(result);
+      console.dir(result);
     },(err: Error) => console.error(err));
   }
 }

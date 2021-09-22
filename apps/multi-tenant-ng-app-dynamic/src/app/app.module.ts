@@ -6,19 +6,22 @@ import { RouterModule } from "@angular/router";
 import { TenantModule } from '@multi-tenant-ng-app/tenant';
 import { SayHelloModule } from '@multi-tenant-ng-app/say-hello';
 import { NavigationModule } from '@multi-tenant-ng-app/navigation';
-import { IamModule } from '@multi-tenant-ng-app/iam';
+// import { IamModule } from '@multi-tenant-ng-app/iam';
 
 import { AppComponent } from './app.component';
 
-import { environment } from '../environments/environment';
+// import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, HttpClientModule, RouterModule,
-    SayHelloModule, TenantModule, NavigationModule,
-    IamModule.forRoot(environment.keycloak)
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), HttpClientModule, RouterModule,
+    SayHelloModule,
+    // TenantModule,
+    NavigationModule,
+    // IamModule.forRoot(environment.keycloak)
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
