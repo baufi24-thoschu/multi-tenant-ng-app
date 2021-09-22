@@ -52,13 +52,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     this.client1Theme = tenant === TenantEnum.CLIENT01;
     this.client2Theme = tenant === TenantEnum.CLIENT02;
-
-    for (const item in TenantEnum) {
-      if (isNaN(Number(item))) {
-        // console.log(item);
-        // console.log(tenant);
-      }
-    }
   }
 
   public logout(): void {

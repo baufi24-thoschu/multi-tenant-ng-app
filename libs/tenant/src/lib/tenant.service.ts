@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from "@angular/common/http";
 
+import { DomService } from '@multi-tenant-ng-app/dom';
+
 import { TenantEnum } from './tenant.enum';
 
 @Injectable({
@@ -9,8 +11,8 @@ import { TenantEnum } from './tenant.enum';
 export class TenantService {
   private readonly hostname: string;
 
-  constructor() {
-    this.hostname = window.location.hostname;
+  constructor(private readonly domService: DomService) {
+    this.hostname = domService.getLocation().hostname;
   }
 
   protected getTenantForHostname(hostname: string): string {

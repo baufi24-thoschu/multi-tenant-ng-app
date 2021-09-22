@@ -17,6 +17,7 @@
     "paths": {
       "@multi-tenant-ng-app/bar-list": ["libs/bar-list/src/index.ts"],
       "@multi-tenant-ng-app/baz-list": ["libs/baz-list/src/index.ts"],
+      "@multi-tenant-ng-app/dom": ["libs/dom/src/index.ts"],
       "@multi-tenant-ng-app/foo-list": ["libs/foo-list/src/index.ts"],
       "@multi-tenant-ng-app/iam": ["libs/iam/src/index.ts"],
       "@multi-tenant-ng-app/navigation": ["libs/navigation/src/index.ts"],

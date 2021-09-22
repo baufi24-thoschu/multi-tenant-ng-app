@@ -51,6 +51,31 @@
         }
       }
     },
+    "dom": {
+      "projectType": "library",
+      "root": "libs/dom",
+      "sourceRoot": "libs/dom/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dom"],
+          "options": {
+            "jestConfig": "libs/dom/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/dom/src/**/*.ts",
+              "libs/dom/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "foo-list": {
       "projectType": "library",
       "root": "libs/foo-list",
@@ -111,7 +136,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/multi-tenant-ng-app-dynamic",
+            "outputPath": "dist/multi-tenant-ng-app-dynamic/browser",
             "index": "apps/multi-tenant-ng-app-dynamic/src/index.html",
             "main": "apps/multi-tenant-ng-app-dynamic/src/main.ts",
             "polyfills": "apps/multi-tenant-ng-app-dynamic/src/polyfills.ts",
@@ -191,6 +216,63 @@
             "jestConfig": "apps/multi-tenant-ng-app-dynamic/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/multi-tenant-ng-app-dynamic/server",
+            "main": "apps/multi-tenant-ng-app-dynamic/server.ts",
+            "tsConfig": "apps/multi-tenant-ng-app-dynamic/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/multi-tenant-ng-app-dynamic/src/environments/environment.ts",
+                  "with": "apps/multi-tenant-ng-app-dynamic/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "multi-tenant-ng-app-dynamic:build:development",
+              "serverTarget": "multi-tenant-ng-app-dynamic:server:development"
+            },
+            "production": {
+              "browserTarget": "multi-tenant-ng-app-dynamic:build:production",
+              "serverTarget": "multi-tenant-ng-app-dynamic:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "multi-tenant-ng-app-dynamic:build:production",
+              "serverTarget": "multi-tenant-ng-app-dynamic:server:production"
+            },
+            "development": {
+              "browserTarget": "multi-tenant-ng-app-dynamic:build:development",
+              "serverTarget": "multi-tenant-ng-app-dynamic:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
