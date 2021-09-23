@@ -24,6 +24,9 @@ export class FooListComponent implements OnInit {
   private exampleTwoComponentFactory: ComponentFactory<ExampleTwoComponent> | undefined;
   private exampleTwoComponentRef: ComponentRef<ExampleTwoComponent> | undefined;
 
+  private exampleThreeComponentFactory: ComponentFactory<ExampleThreeComponent> | undefined;
+  private exampleThreeComponentRef: ComponentRef<ExampleThreeComponent> | undefined;
+
   constructor(
     @Inject(ComponentFactoryResolver) private readonly factoryResolver: ComponentFactoryResolver,
     @Inject(ViewContainerRef) private readonly viewContainerRef: ViewContainerRef,
@@ -34,11 +37,12 @@ export class FooListComponent implements OnInit {
   ngOnInit(): void {
     const idTokenParsed = this.keycloakService.getKeycloakInstance().idTokenParsed;
     const idTokenParsedNamePicked = pick(['name'], idTokenParsed);
+    const idTokenParsedConfigPicked = pick(['config'], idTokenParsed);
     // ToDo
-    console.log(idTokenParsedNamePicked);
-    const config = {foo: 1, bar: true, baz: 'Tom S.'};
+    const config = {foo: 1, bar: true, baz: idTokenParsedNamePicked};
     this.doExampleOneComponent(config.baz);
     this.doExampleTwoComponent(config.bar);
+    this.doExampleThreeComponent(config.foo);
   }
 
   private doExampleOneComponent(param: any): void {
@@ -61,5 +65,16 @@ export class FooListComponent implements OnInit {
     this.renderer.setStyle(this.exampleTwoComponentRef.location.nativeElement, 'color', 'orange');
 
     this.viewContainerRef.insert(this.exampleTwoComponentRef.hostView);
+  }
+
+  private doExampleThreeComponent(param: any): void {
+    this.exampleThreeComponentFactory = this.factoryResolver.resolveComponentFactory(ExampleThreeComponent);
+    this.exampleThreeComponentRef = this.exampleThreeComponentFactory.create(this.viewContainerRef.injector);
+
+    this.renderer.setProperty(this.exampleThreeComponentRef.instance, 'config', param);
+    this.renderer.addClass(this.exampleThreeComponentRef.location.nativeElement, 'cool');
+    this.renderer.setStyle(this.exampleThreeComponentRef.location.nativeElement, 'color', 'pink');
+
+    this.viewContainerRef.insert(this.exampleThreeComponentRef.hostView);
   }
 }
