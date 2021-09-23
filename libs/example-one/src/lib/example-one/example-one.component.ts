@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'multi-tenant-ng-app-example-one',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./example-one.component.scss']
 })
 export class ExampleOneComponent implements OnInit {
+  @Input() public config: any | undefined;
 
-  constructor() { }
+  // constructor() {}
 
   ngOnInit(): void {
+    console.log(this.config);
   }
-
 }

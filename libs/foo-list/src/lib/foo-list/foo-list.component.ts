@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, ElementRef, Inject, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ComponentFactory,
+  ComponentFactoryResolver, ComponentRef,
+  Inject, OnInit, Renderer2, ViewContainerRef
+} from '@angular/core';
 
 import { ExampleOneComponent } from '@multi-tenant-ng-app/example-one';
 import { ExampleTwoComponent } from '@multi-tenant-ng-app/example-two';
@@ -12,32 +17,49 @@ import { pick } from 'ramda';
   templateUrl: './foo-list.component.html',
   styleUrls: ['./foo-list.component.scss']
 })
-export class FooListComponent implements AfterViewInit, OnInit {
+export class FooListComponent implements OnInit {
+  private exampleOneComponentFactory: ComponentFactory<ExampleOneComponent> | undefined;
+  private exampleOneComponentRef: ComponentRef<ExampleOneComponent> | undefined;
+
+  private exampleTwoComponentFactory: ComponentFactory<ExampleTwoComponent> | undefined;
+  private exampleTwoComponentRef: ComponentRef<ExampleTwoComponent> | undefined;
+
   constructor(
     @Inject(ComponentFactoryResolver) private readonly factoryResolver: ComponentFactoryResolver,
     @Inject(ViewContainerRef) private readonly viewContainerRef: ViewContainerRef,
     private readonly renderer: Renderer2,
-    private readonly el: ElementRef,
     private readonly keycloakService: KeycloakService
-  ) {
-    console.log('*** FooListComponent ***');
-  }
+  ) {}
 
   ngOnInit(): void {
-    // Do stuff with Renderer2 and the config from keycloak
     const idTokenParsed = this.keycloakService.getKeycloakInstance().idTokenParsed;
     const idTokenParsedNamePicked = pick(['name'], idTokenParsed);
+    // ToDo
     console.log(idTokenParsedNamePicked);
+    const config = {foo: 1, bar: true, baz: 'Tom S.'};
+    this.doExampleOneComponent(config.baz);
+    this.doExampleTwoComponent(config.bar);
   }
 
-  ngAfterViewInit(): void {
-    const div = this.renderer.createElement('multi-tenant-ng-app-example-one');
-    console.log(div);
-    // const text = this.renderer.createText(`Hello world from BarListComponent by ${JSON.stringify(idTokenParsedNamePicked)}`);
-    // this.renderer.appendChild(div, text);
-    // this.renderer.appendChild(this.el.nativeElement, div);
-    const factory = this.factoryResolver.resolveComponentFactory(ExampleOneComponent);
-    const component = factory.create(this.viewContainerRef.parentInjector);
-    this.viewContainerRef.insert(component.hostView)
+  private doExampleOneComponent(param: any): void {
+    this.exampleOneComponentFactory = this.factoryResolver.resolveComponentFactory(ExampleOneComponent);
+    this.exampleOneComponentRef = this.exampleOneComponentFactory.create(this.viewContainerRef.injector);
+
+    this.renderer.setProperty(this.exampleOneComponentRef.instance, 'config', param);
+    this.renderer.addClass(this.exampleOneComponentRef.location.nativeElement, 'wild');
+    this.renderer.setStyle(this.exampleOneComponentRef.location.nativeElement, 'color', 'grey');
+
+    this.viewContainerRef.insert(this.exampleOneComponentRef.hostView);
+  }
+
+  private doExampleTwoComponent(param: any): void {
+    this.exampleTwoComponentFactory = this.factoryResolver.resolveComponentFactory(ExampleTwoComponent);
+    this.exampleTwoComponentRef = this.exampleTwoComponentFactory.create(this.viewContainerRef.injector);
+
+    this.renderer.setProperty(this.exampleTwoComponentRef.instance, 'config', param);
+    this.renderer.addClass(this.exampleTwoComponentRef.location.nativeElement, 'cool');
+    this.renderer.setStyle(this.exampleTwoComponentRef.location.nativeElement, 'color', 'orange');
+
+    this.viewContainerRef.insert(this.exampleTwoComponentRef.hostView);
   }
 }
