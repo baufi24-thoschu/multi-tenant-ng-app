@@ -76,6 +76,156 @@
         }
       }
     },
+    "example-five": {
+      "projectType": "library",
+      "root": "libs/example-five",
+      "sourceRoot": "libs/example-five/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-five"],
+          "options": {
+            "jestConfig": "libs/example-five/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-five/src/**/*.ts",
+              "libs/example-five/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "example-four": {
+      "projectType": "library",
+      "root": "libs/example-four",
+      "sourceRoot": "libs/example-four/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-four"],
+          "options": {
+            "jestConfig": "libs/example-four/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-four/src/**/*.ts",
+              "libs/example-four/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "example-one": {
+      "projectType": "library",
+      "root": "libs/example-one",
+      "sourceRoot": "libs/example-one/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-one"],
+          "options": {
+            "jestConfig": "libs/example-one/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-one/src/**/*.ts",
+              "libs/example-one/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "example-six": {
+      "projectType": "library",
+      "root": "libs/example-six",
+      "sourceRoot": "libs/example-six/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-six"],
+          "options": {
+            "jestConfig": "libs/example-six/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-six/src/**/*.ts",
+              "libs/example-six/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "example-three": {
+      "projectType": "library",
+      "root": "libs/example-three",
+      "sourceRoot": "libs/example-three/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-three"],
+          "options": {
+            "jestConfig": "libs/example-three/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-three/src/**/*.ts",
+              "libs/example-three/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "example-two": {
+      "projectType": "library",
+      "root": "libs/example-two",
+      "sourceRoot": "libs/example-two/src",
+      "prefix": "multi-tenant-ng-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/example-two"],
+          "options": {
+            "jestConfig": "libs/example-two/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/example-two/src/**/*.ts",
+              "libs/example-two/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "foo-list": {
       "projectType": "library",
       "root": "libs/foo-list",
@@ -433,6 +583,7 @@
     }
   },
   "cli": {
+    "analytics": false,
     "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
