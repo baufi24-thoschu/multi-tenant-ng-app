@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { pick, prop } from 'ramda';
+import { pick } from 'ramda';
 
 @Component({
   selector: 'multi-tenant-ng-app-bar-list',

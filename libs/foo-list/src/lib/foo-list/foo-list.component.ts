@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
   Inject, OnInit, Renderer2, ViewContainerRef
@@ -10,8 +9,9 @@ import { ExampleTwoComponent } from '@multi-tenant-ng-app/example-two';
 import { ExampleThreeComponent } from '@multi-tenant-ng-app/example-three';
 
 import { KeycloakService } from 'keycloak-angular';
-import { isNil, pick } from 'ramda';
-import { KeycloakTokenParsed } from 'keycloak-js';
+import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
+
+import { FooListInterface } from './foo-list.interface';
 
 @Component({
   selector: 'multi-tenant-ng-app-foo-list',
@@ -19,14 +19,15 @@ import { KeycloakTokenParsed } from 'keycloak-js';
   styleUrls: ['./foo-list.component.scss']
 })
 export class FooListComponent implements OnInit {
+  private readonly idTokenParsed: KeycloakTokenParsed | undefined;
   private exampleOneComponentFactory: ComponentFactory<ExampleOneComponent> | undefined;
   private exampleOneComponentRef: ComponentRef<ExampleOneComponent> | undefined;
-
   private exampleTwoComponentFactory: ComponentFactory<ExampleTwoComponent> | undefined;
   private exampleTwoComponentRef: ComponentRef<ExampleTwoComponent> | undefined;
-
   private exampleThreeComponentFactory: ComponentFactory<ExampleThreeComponent> | undefined;
   private exampleThreeComponentRef: ComponentRef<ExampleThreeComponent> | undefined;
+
+  public readonly user_avatar: URL;
 
   constructor(
     @Inject(ComponentFactoryResolver) private readonly factoryResolver: ComponentFactoryResolver,
@@ -34,16 +35,16 @@ export class FooListComponent implements OnInit {
     private readonly renderer: Renderer2,
     private readonly keycloakService: KeycloakService
   ) {
-    const idTokenParsed: KeycloakTokenParsed | undefined = this.keycloakService.getKeycloakInstance().idTokenParsed;
-    console.log(idTokenParsed);
+    const keycloakInstance: KeycloakInstance = this.keycloakService.getKeycloakInstance();
+    this.idTokenParsed = keycloakInstance.idTokenParsed;
+
+    this.user_avatar = this.idTokenParsed ? new URL((this.idTokenParsed as FooListInterface).avatar_url) : new URL('');
   }
 
+
   ngOnInit(): void {
-    const idTokenParsed = this.keycloakService.getKeycloakInstance().idTokenParsed;
-    const idTokenParsedNamePicked: string = <string>pick(['name'], idTokenParsed);
-    const idTokenParsedConfigPicked: Pick<KeycloakTokenParsed, never> = pick(['config'], idTokenParsed);
-    // ToDo
-    const config = isNil(idTokenParsedConfigPicked) ? {foo: 1, bar: true, baz: idTokenParsedNamePicked} : idTokenParsedConfigPicked;
+    const config = (this.idTokenParsed as FooListInterface).config;
+    const config1 = config ? config : {foo: 1, bar: true, baz: (this.idTokenParsed as FooListInterface).name};
     // this.doExampleOneComponent(config.baz);
     // this.doExampleTwoComponent(config.bar);
     // this.doExampleThreeComponent(config.foo);
