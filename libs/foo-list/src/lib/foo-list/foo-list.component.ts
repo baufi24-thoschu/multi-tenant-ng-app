@@ -10,7 +10,8 @@ import { ExampleTwoComponent } from '@multi-tenant-ng-app/example-two';
 import { ExampleThreeComponent } from '@multi-tenant-ng-app/example-three';
 
 import { KeycloakService } from 'keycloak-angular';
-import { pick } from 'ramda';
+import { isNil, pick } from 'ramda';
+import { KeycloakTokenParsed } from 'keycloak-js';
 
 @Component({
   selector: 'multi-tenant-ng-app-foo-list',
@@ -32,17 +33,20 @@ export class FooListComponent implements OnInit {
     @Inject(ViewContainerRef) private readonly viewContainerRef: ViewContainerRef,
     private readonly renderer: Renderer2,
     private readonly keycloakService: KeycloakService
-  ) {}
+  ) {
+    const idTokenParsed: KeycloakTokenParsed | undefined = this.keycloakService.getKeycloakInstance().idTokenParsed;
+    console.log(idTokenParsed);
+  }
 
   ngOnInit(): void {
     const idTokenParsed = this.keycloakService.getKeycloakInstance().idTokenParsed;
-    const idTokenParsedNamePicked = pick(['name'], idTokenParsed);
-    const idTokenParsedConfigPicked = pick(['config'], idTokenParsed);
+    const idTokenParsedNamePicked: string = <string>pick(['name'], idTokenParsed);
+    const idTokenParsedConfigPicked: Pick<KeycloakTokenParsed, never> = pick(['config'], idTokenParsed);
     // ToDo
-    const config = {foo: 1, bar: true, baz: idTokenParsedNamePicked};
-    this.doExampleOneComponent(config.baz);
-    this.doExampleTwoComponent(config.bar);
-    this.doExampleThreeComponent(config.foo);
+    const config = isNil(idTokenParsedConfigPicked) ? {foo: 1, bar: true, baz: idTokenParsedNamePicked} : idTokenParsedConfigPicked;
+    // this.doExampleOneComponent(config.baz);
+    // this.doExampleTwoComponent(config.bar);
+    // this.doExampleThreeComponent(config.foo);
   }
 
   private doExampleOneComponent(param: any): void {
