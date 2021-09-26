@@ -20,13 +20,11 @@ export class AppService {
     return tenant_id;
   }
 
-  public getConfig(request: Request): string {
-    const construction_config_path = 'x-tenant-construction_config';
-    const construction_config: string = this.extractHeaderValue(request, construction_config_path);
+  public getToken(request: Request): string {
+    const tenant_token_path = 'x-tenant-token';
+    const tenant_token: string = this.extractHeaderValue(request, tenant_token_path);
 
-    console.log('##########');
-
-    return construction_config;
+    return tenant_token;
   }
 
   private extractHeaderValue(request: Request, header: string): string {

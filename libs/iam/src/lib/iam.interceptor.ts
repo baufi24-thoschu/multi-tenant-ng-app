@@ -7,28 +7,24 @@ import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
 
 @Injectable()
 export class IamInterceptor implements HttpInterceptor {
-  private static readonly headerName = 'x-tenant-construction_config';
-  private readonly idTokenParsed: KeycloakTokenParsed | any;
+  private static readonly tokenName = 'x-tenant-token';
+  private readonly keycloakInstance: KeycloakInstance;
 
   constructor(private readonly keycloakService: KeycloakService) {
-    const keycloakInstance: KeycloakInstance = keycloakService.getKeycloakInstance();
+    this.keycloakInstance = keycloakService.getKeycloakInstance();
 
-    this.idTokenParsed = keycloakInstance.idTokenParsed;
+    console.log(this.keycloakInstance.tokenParsed);
+    console.log(this.keycloakInstance.token);
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const headers: HttpHeaders = request.headers.append(IamInterceptor.headerName, this.getConstructionConfig());
+    // @ts-ignore
+    const headers: HttpHeaders = request.headers.append(IamInterceptor.tokenName, this.keycloakInstance?.token);
 
     request = request.clone({
       headers
     });
 
     return next.handle(request);
-  }
-
-  private getConstructionConfig(): string {
-    return this.idTokenParsed.construction_config ?
-      this.idTokenParsed.construction_config :
-        JSON.stringify({});
   }
 }

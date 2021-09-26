@@ -11,9 +11,8 @@ export class AppController {
     const tenant: string = this.appService.getId(request);
     console.dir(tenant);
 
-    const construction_config: string = this.appService.getConfig(request);
-    const construction_config_object: JSON = JSON.parse(construction_config);
-    console.dir(construction_config_object);
+    const token: string = this.appService.getToken(request);
+    console.dir(token);
 
     return this.appService.getData();
   }

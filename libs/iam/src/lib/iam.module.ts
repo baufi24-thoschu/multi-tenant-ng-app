@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 
 import { KeycloakAngularModule, KeycloakOptions, KeycloakService } from 'keycloak-angular';
 import { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
+import { mergeDeepRight } from 'ramda';
+
+import { TenantService } from '@multi-tenant-ng-app/tenant';
 
 import { IamInterceptor } from './iam.interceptor';
 
@@ -19,19 +22,20 @@ export class IamModule {
       providers: [
         {
           provide: APP_INITIALIZER,
-          useFactory: (keycloakService: KeycloakService): () => void => {
+          useFactory: (keycloakService: KeycloakService, tenantService: TenantService): () => void => {
             const promiseResolveText = 'KeycloakInit:';
             const promiseRejectText = 'Error KeycloakInit:';
+            const tenant: string = tenantService.getTenant();
 
             return async (): Promise<void> => {
               await keycloakService
-                .init(IamModule.getKeycloakInitOptions(keycloakEnvironment))
-                .then((res: boolean) => window.console.info(`${promiseResolveText} ${res}`))
-                .catch((err: Error) => console.error(`${promiseRejectText} ${err}`));
+                .init(IamModule.getKeycloakInitOptions(mergeDeepRight(keycloakEnvironment, { realm: tenant})))
+                .then((res: boolean) => window.console.info(`${tenant} ${promiseResolveText} ${res}`))
+                .catch((err: Error) => console.error(`${tenant} ${promiseRejectText} ${err}`));
             };
           },
           multi: true,
-          deps: [KeycloakService]
+          deps: [KeycloakService, TenantService]
         }, {
           provide: HTTP_INTERCEPTORS,
           useClass: IamInterceptor,
