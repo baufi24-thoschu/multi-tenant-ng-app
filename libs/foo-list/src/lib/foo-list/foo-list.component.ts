@@ -105,10 +105,6 @@ export class FooListComponent implements OnInit {
         default:
         // this.doExampleThreeComponent('default');
       }
-    } else {
-      this.doExampleOneComponent(config.modules.mgt_budget_calc);
-      this.doExampleTwoComponent(config.modules.immo_rates);
-      this.doExampleThreeComponent(config.modules.mgt_calc);
     }
   }
 
