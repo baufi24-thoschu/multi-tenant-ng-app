@@ -4,14 +4,15 @@ import {
   Inject, OnInit, Renderer2, ViewContainerRef
 } from '@angular/core';
 
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
+import { hasIn } from 'ramda';
+
 import { ExampleOneComponent } from '@multi-tenant-ng-app/example-one';
 import { ExampleTwoComponent } from '@multi-tenant-ng-app/example-two';
 import { ExampleThreeComponent } from '@multi-tenant-ng-app/example-three';
 
-import { KeycloakService } from 'keycloak-angular';
-import { KeycloakInstance, KeycloakTokenParsed } from 'keycloak-js';
-
-import { FooListInterface } from './foo-list.interface';
+import { FooListInterface, FooListConfigInterface } from './foo-list.interface';
 
 @Component({
   selector: 'multi-tenant-ng-app-foo-list',
@@ -20,6 +21,7 @@ import { FooListInterface } from './foo-list.interface';
 })
 export class FooListComponent implements OnInit {
   private readonly idTokenParsed: KeycloakTokenParsed | undefined;
+
   private exampleOneComponentFactory: ComponentFactory<ExampleOneComponent> | undefined;
   private exampleOneComponentRef: ComponentRef<ExampleOneComponent> | undefined;
   private exampleTwoComponentFactory: ComponentFactory<ExampleTwoComponent> | undefined;
@@ -38,16 +40,76 @@ export class FooListComponent implements OnInit {
     const keycloakInstance: KeycloakInstance = this.keycloakService.getKeycloakInstance();
     this.idTokenParsed = keycloakInstance.idTokenParsed;
 
-    this.user_avatar = this.idTokenParsed ? new URL((this.idTokenParsed as FooListInterface).avatar_url) : new URL('');
+    this.user_avatar = hasIn('avatar_url', this.idTokenParsed) ?
+      new URL((this.idTokenParsed as FooListInterface).avatar_url) :
+        new URL('https://ik.imagekit.io/uvfrqmdnhxst/Default_Image_Thumbnail_tAp2HMoMxj.png?updatedAt=1632665691367');
+
+    console.log(hasIn('name', this.idTokenParsed) ? (this.idTokenParsed as FooListInterface).name : '!!! noname !!!');
   }
 
 
   ngOnInit(): void {
-    const config = (this.idTokenParsed as FooListInterface).config;
-    const config1 = config ? config : {foo: 1, bar: true, baz: (this.idTokenParsed as FooListInterface).name};
-    // this.doExampleOneComponent(config.baz);
-    // this.doExampleTwoComponent(config.bar);
-    // this.doExampleThreeComponent(config.foo);
+    const defaultConfig: FooListConfigInterface = {
+      "id": 0,
+      "online": false,
+      "app_name": '',
+      "css_version": '',
+      "lang": '',
+      "modules": {
+        "mgt_calc": 'default foo',
+        "mgt_budget_calc": 'default bar',
+        "immo_rates": 'default baz'
+      }
+    };
+
+    const config: FooListConfigInterface = hasIn('config', this.idTokenParsed) ?
+      (this.idTokenParsed as FooListInterface).config :
+        defaultConfig;
+
+    const modules: Record<'mgt_calc' | 'mgt_budget_calc' | 'immo_rates', string | null> = config.modules;
+
+    console.log(config.id);
+    console.log(config.app_name);
+    console.log(config.css_version);
+
+    if(config.online) {
+      switch (config.modules.mgt_calc) {
+        case '1.0':;
+          this.doExampleOneComponent(`1.0`);
+          break;
+        case '2.0':
+          this.doExampleOneComponent(`2.0`);
+          break;
+        default:
+          // this.doExampleOneComponent('default');
+      }
+
+      switch (config.modules.immo_rates) {
+        case '1.0':;
+          this.doExampleTwoComponent(`1.0`);
+          break;
+        case '2.0':
+          this.doExampleTwoComponent(`2.0`);
+          break;
+        default:
+        // this.doExampleTwoComponent('default');
+      }
+
+      switch (config.modules.mgt_budget_calc) {
+        case '1.0':;
+          this.doExampleThreeComponent(`1.0`);
+          break;
+        case '2.0':
+          this.doExampleThreeComponent(`2.0`);
+          break;
+        default:
+        // this.doExampleThreeComponent('default');
+      }
+    } else {
+      this.doExampleOneComponent(config.modules.mgt_budget_calc);
+      this.doExampleTwoComponent(config.modules.immo_rates);
+      this.doExampleThreeComponent(config.modules.mgt_calc);
+    }
   }
 
   private doExampleOneComponent(param: any): void {

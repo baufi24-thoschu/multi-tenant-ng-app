@@ -1,26 +1,12 @@
 {
   "id": 325,
-  "req": "create",
   "online": true,
   "app_name": "baufi24",
-  "ux_v": "2.4_a",
-  "css_v": "2.3",
+  "css_version": "2.3",
   "lang": "de",
-  "mods": {
-    "mgt_calc": {
-      "v": "1.0"
-    },
-    "mgt_budget_calc": {
-      "v": "1.0"
-    },
-    "mgt_interests_chart": {
-      "v": "1.0"
-    },
-    "immo_shop": {
-      "v": "1.0"
-    },
-    "immo_rats": {
-      "v": "1.0"
-    }
+  "modules": {
+    "mgt_calc": "latest",
+    "mgt_budget_calc": "1.0",
+    "immo_rates": null
   }
 }
