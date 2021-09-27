@@ -1,0 +1,12 @@
+avatar_url : https://ik.imagekit.io/uvfrqmdnhxst/IMG_0342-1024x575.jpg_OGoQh0kch.jpg?updatedAt=1632557499837
+config : {"id": 325,"online":true,"app_name":"baufi24","css_version":"2.3","lang": "de","modules":{"mgt_calc":"latest","mgt_budget_calc":"1.0","immo_rates":null}}
+
+avatar_url : https://ik.imagekit.io/uvfrqmdnhxst/Robots-Sidekick-Tall-intro_tNzwc5By_.jpeg
+config : {"id": 1377,"online":true,"app_name":"baufi24","css_version":"2.7","lang": "de","modules":{"mgt_calc":null,"mgt_budget_calc":"1.0","immo_rates":"latest"}}
+
+baufi24
+coba
+
+ng-dynamic
+http://baufi24.localhost:4300/*
+http://coba.localhost:4400/*
